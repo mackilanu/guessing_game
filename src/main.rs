@@ -7,6 +7,7 @@ fn main() {
     println!("Guess the number!");
 
     let secret_number = rand::thread_rng().gen_range(1, 101);
+    let mut num_tries: u32 = 0;
 
     loop { 
         println!("Please input your guess.");
@@ -23,12 +24,13 @@ fn main() {
         };
 
         println!("You guessed: {}", guess);
+        num_tries += 1;
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small!"),
             Ordering::Greater=> println!("Too big!"),
             Ordering::Equal => { 
-                println!("You win!");
+                println!("You win, and it only required {} tries!", num_tries);
                 break;
             },
         }
